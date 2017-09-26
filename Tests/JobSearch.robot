@@ -11,7 +11,6 @@ Test Teardown  CommonWeb.End Web Test
 #to run type the following line in the terminal
 #robot -d results Tests/JobSearch.robot
 #robot -d results -i P1 Tests/JobSearch.robot
-#robot -d results -i Debug Tests/JobSearch.robot
 
 *** Variables ***
 
@@ -21,7 +20,7 @@ ${SEARCH_TERM} =  Test
 ${SEARCH_LOCATION} =  Bolingbrook, IL
 ${SEARCH_RADIUS} =  30
 &{Posting}  RecruiterID=Null  Headline=Null  Location=Null  Type=Null  Pay=Null
-
+${RowNumber} =  1
 
 *** Test Cases ***
 

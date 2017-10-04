@@ -3,8 +3,13 @@ Documentation  This test suite opens each web page and does a job search
 Resource  ../Resources/JobSearchApp.robot
 Resource  ../Resources/CommonWeb.robot
 Resource  ../Resources/CommonExcel.robot
+Resource  ../Resources/CommonSQL.robot
+
 Test Setup  CommonWeb.Begin Web Test
 Test Teardown  CommonWeb.End Web Test
+Suite Setup  CommonSQL.Connect to DB
+Suite Teardown  CommonSQL.Disconnect from DB
+
 #in Phase 0 the browser is left open to view the search results.
 #in Phase 1 the search results will appear in a report so the browser can be closed.
 
@@ -19,8 +24,9 @@ ${BROWSER} =  gc
 ${SEARCH_TERM} =  Test
 ${SEARCH_LOCATION} =  Bolingbrook, IL
 ${SEARCH_RADIUS} =  30
-&{Posting}  RecruiterID=Null  Headline=Null  Location=Null  Type=Null  Pay=Null
+&{Posting}  RecruiterID=0  Headline=Null  Location=Null  Type=Null  Pay=Null
 ${RowNumber} =  1
+@{DATE}
 
 *** Test Cases ***
 
@@ -39,10 +45,4 @@ Get CyberCoders
     [tags]  P1
     JobSearchApp.Open CyberCoders
     JobSearchApp.Read CyberCoders
-
-Debug Test Excel
-    [Documentation]  this is a debug test to work on the output spreadsheet
-    [Tags]  Debug
-    JobSearchApp.Debug log to Excel
-
 

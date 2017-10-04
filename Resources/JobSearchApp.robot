@@ -24,6 +24,3 @@ Open Randstrad
     RandstradLanding.Load Landing Page
     RandstradLanding.Verify Page Loaded
     RandstradLanding.Search For Job
-
-Debug log to Excel
-    CyberCodersResults1.Debug Just log results

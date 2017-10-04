@@ -1,6 +1,9 @@
 *** Settings ***
 Library  Selenium2Library
+Library  String
 Resource  ../CommonExcel.robot
+Resource  ../CommonSQL.robot
+
 
 *** Variables ***
 ${CC_Loaded} =  xpath=//div[@class='job-listing-container']
@@ -19,6 +22,7 @@ Verify Page Loaded
 
 Get Data
     CommonExcel.Open Excel File
+    ${Posting.RecruiterID} =  set variable  1
     ${NumPosting} =  get matching xpath count  ${CC_PostingCount_L}
     :FOR  ${Index}  IN RANGE  1  ${NumPosting}+1
     \  Continue For Loop If  ${Index}==5
@@ -26,9 +30,11 @@ Get Data
     \  ${Posting.Location} =  get text  ${CC_Loaded}/div[${Index}${CC_Location_L}
     \  ${Posting.Type} =  get text  ${CC_Loaded}/div[${Index}${CC_Type_L}
     \  ${Posting.Pay} =  get text  ${CC_Loaded}/div[${Index}${CC_Wage_L}
+    \  ${Posting.Pay} =  Remove String  ${Posting.Pay}  ${Posting.Type}
     \  ${Posting.URL} =  get element attribute  ${CC_Loaded}/div[${Index}${CC_HEADLINE_L}@href
     \  Log Variables
-    \  CommonExcel.Log results  &{Posting}
+    \  CommonSQL.Insert New Posting  &{Posting}
+#    \  CommonExcel.Log results  &{Posting}
 
     CommonExcel.Save Excel File
 

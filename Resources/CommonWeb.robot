@@ -6,6 +6,7 @@ Library  Selenium2Library
 
 *** Keywords ***
 Begin Web Test
+    @{DATE} =  get time  year month day
     Open Browser  about:blank  ${BROWSER}
     maximize browser window
 End Web Test
